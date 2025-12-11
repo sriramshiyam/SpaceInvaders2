@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6dkkklv0n8se"]
+
+[ext_resource type="PackedScene" uid="uid://bye0c13r04jke" path="res://scenes/broken_enemy/BrokenEnemy.tscn" id="1_2pr42"]
+[ext_resource type="Texture2D" uid="uid://7rqhf7ibfvy" path="res://assets/sprite/broken_enemies/broken1_enemy1.png" id="2_tc0lx"]
+[ext_resource type="Texture2D" uid="uid://d1i6emyvtjp5q" path="res://assets/sprite/broken_enemies/broken2_enemy1.png" id="3_51p4w"]
+[ext_resource type="Texture2D" uid="uid://bb2khfjcgc42h" path="res://assets/sprite/broken_enemies/broken3_enemy1.png" id="4_odxs1"]
+
+[node name="BrokenEnemy1" instance=ExtResource("1_2pr42")]
+
+[node name="CollisionPolygon2D" parent="RigidBody2D" index="0"]
+position = Vector2(-6.776508, -5.624233)
+polygon = PackedVector2Array(6.776508, 5.624233, 6.776508, -8.375767, 3.7765079, -8.375767, 3.7765079, 2.6242328, -0.22349203, 2.6242328, -0.22349203, -8.375767, -3.2234921, -8.375767, -3.2234921, -4.375767, -7.223492, -4.375767, -7.223492, 1.6242329, -3.2234921, 1.6242329, -3.2234921, 5.624233)
+
+[node name="Sprite2D" parent="RigidBody2D" index="1"]
+position = Vector2(-6.9999995, -6.9999995)
+texture = ExtResource("2_tc0lx")
+
+[node name="CollisionPolygon2D" parent="RigidBody2D2" index="0"]
+position = Vector2(7.4503965, -7.443122)
+polygon = PackedVector2Array(-7.4503965, 7.443122, 2.5496032, 7.443122, 2.5496032, 3.4431217, 6.5496035, 3.4431217, 6.5496035, -2.5568783, 2.5496032, -2.5568783, 2.5496032, -6.556878, -0.45039678, -6.556878, -0.45039678, 3.4431217, -4.4503965, 3.4431217, -4.4503965, -6.556878, -7.4503965, -6.556878)
+
+[node name="Sprite2D" parent="RigidBody2D2" index="1"]
+position = Vector2(6.9999995, -6.9999995)
+texture = ExtResource("3_51p4w")
+
+[node name="CollisionPolygon2D" parent="RigidBody2D3" index="0"]
+position = Vector2(-0.38461545, 4.7927346)
+polygon = PackedVector2Array(0.38163394, -5.1016226, -6.5641026, -5.1016226, -6.5641026, 9.800665, -2.5951104, 9.800665, -2.5951104, -0.84382606, 3.358378, -0.84382606, 3.358378, 9.800665, 7.32737, 9.800665, 7.32737, -5.1016226)
+
+[node name="Sprite2D" parent="RigidBody2D3" index="1"]
+position = Vector2(0, 6.9999995)
+texture = ExtResource("4_odxs1")

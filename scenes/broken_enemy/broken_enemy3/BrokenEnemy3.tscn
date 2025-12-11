@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbo2lb6kdymii"]
+
+[ext_resource type="PackedScene" uid="uid://bye0c13r04jke" path="res://scenes/broken_enemy/BrokenEnemy.tscn" id="1_3qnul"]
+[ext_resource type="Texture2D" uid="uid://tsny53gxt6s6" path="res://assets/sprite/broken_enemies/broken1_enemy3.png" id="2_aojay"]
+[ext_resource type="Texture2D" uid="uid://bbi8jo1t5ovhk" path="res://assets/sprite/broken_enemies/broken2_enemy3.png" id="3_as4m8"]
+[ext_resource type="Texture2D" uid="uid://caxlq8umjq5pf" path="res://assets/sprite/broken_enemies/broken3_enemy3.png" id="4_as4m8"]
+
+[node name="BrokenEnemy3" instance=ExtResource("1_3qnul")]
+
+[node name="CollisionPolygon2D" parent="RigidBody2D" index="0"]
+position = Vector2(-7, -7.539843)
+polygon = PackedVector2Array(7, 7.539843, 7, -6.460157, 4, -6.460157, 4, -2.4601572, -4, -2.4601572, -4, -6.460157, -7, -6.460157, -7, 7.539843)
+
+[node name="Sprite2D" parent="RigidBody2D" index="1"]
+position = Vector2(-6.9999995, -6.9999995)
+texture = ExtResource("2_aojay")
+
+[node name="CollisionPolygon2D" parent="RigidBody2D2" index="0"]
+position = Vector2(7, -7.539843)
+polygon = PackedVector2Array(-7, 7.539843, 7, 7.539843, 7, -6.460157, 4, -6.460157, 4, -2.4601572, -4, -2.4601572, -4, -6.460157, -7, -6.460157)
+
+[node name="Sprite2D" parent="RigidBody2D2" index="1"]
+position = Vector2(6.9999995, -6.9999995)
+texture = ExtResource("3_as4m8")
+
+[node name="CollisionPolygon2D" parent="RigidBody2D3" index="0"]
+position = Vector2(0, 7)
+polygon = PackedVector2Array(0, -7.4511433, -2.9767442, -7.4511433, -2.9767442, 7.4511433, 2.9767442, 7.4511433, 2.9767442, -7.4511433)
+
+[node name="Sprite2D" parent="RigidBody2D3" index="1"]
+position = Vector2(0, 6.9999995)
+texture = ExtResource("4_as4m8")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj32pxvkdvqv0"]
+
+[ext_resource type="Texture2D" uid="uid://cn6jsrvu26gh" path="res://assets/sprite/shield.png" id="1_l1vlb"]
+[ext_resource type="Script" uid="uid://gw83hq44tc2e" path="res://scenes/shield/Shield.gd" id="1_qlf1v"]
+
+[node name="Shield" type="StaticBody2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_qlf1v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("1_l1vlb")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-3.351345, -2.439354)
+polygon = PackedVector2Array(3.351345, -18.560648, -13.648653, -18.560648, -13.648653, -14.560649, -20.648655, -14.560649, -20.648655, -11.560649, -24.648655, -11.560649, -24.648655, 19.439352, -20.648655, 19.439352, -20.648655, 23.439352, 27.351345, 23.439352, 27.351345, 19.439352, 31.351345, 19.439352, 31.351345, -11.560649, 27.351345, -11.560649, 27.351345, -14.560649, 20.351345, -14.560649, 20.351345, -18.560648)

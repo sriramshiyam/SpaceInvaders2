@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://cms38ts61qs4e"]
+
+[ext_resource type="Texture2D" uid="uid://b3b37r6c36m6x" path="res://assets/sprite/enemy1.png" id="1_i1u57"]
+[ext_resource type="Script" uid="uid://d2fc0o0334rcn" path="res://scenes/enemy/Enemy.gd" id="1_vwhkw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3l8kd"]
+size = Vector2(28, 28)
+
+[node name="Enemy" type="AnimatableBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_vwhkw")
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
+node_a = NodePath("..")
+node_b = NodePath("../RigidBody2D")
+length = 20.0
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(0, 25)
+collision_mask = 4
+mass = 0.2
+linear_damp = 5.0
+angular_damp = 5.0
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("1_i1u57")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_3l8kd")

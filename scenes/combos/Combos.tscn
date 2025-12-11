@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmmfgesinnrvi"]
+
+[ext_resource type="Script" uid="uid://cig1pdofuoxww" path="res://scenes/combos/Combos.gd" id="1_u4j5o"]
+[ext_resource type="AudioStream" uid="uid://clwfprj02wt7c" path="res://assets/audio/combo.wav" id="2_p25x1"]
+
+[node name="Combos" type="Node2D"]
+script = ExtResource("1_u4j5o")
+
+[node name="ComboSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_p25x1")
+volume_db = -15.0
