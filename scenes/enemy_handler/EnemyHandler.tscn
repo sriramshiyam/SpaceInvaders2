@@ -16,9 +16,13 @@ one_shot = true
 [node name="MoveDownTimer" type="Timer" parent="Timers"]
 one_shot = true
 
+[node name="CreateBulletTimer" type="Timer" parent="Timers"]
+one_shot = true
+
 [node name="EnemyDestroySound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_mxavo")
 volume_db = -15.0
 
 [connection signal="timeout" from="Timers/SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Timers/MoveDownTimer" to="." method="_on_move_down_timer_timeout"]
+[connection signal="timeout" from="Timers/CreateBulletTimer" to="." method="_on_create_bullet_timer_timeout"]

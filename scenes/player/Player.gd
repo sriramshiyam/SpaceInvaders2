@@ -12,7 +12,7 @@ var shoot_timer: float = 0
 
 const SHOOT_SPEED: float = 1000
 const SPEED: float = 400
-const SHOOT_WAIT_TIME: float = 0.17
+const SHOOT_WAIT_TIME: float = 0.2
 
 func _ready() -> void:
 	sync_to_physics = false

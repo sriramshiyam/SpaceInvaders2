@@ -8,8 +8,10 @@ extends Node2D
 @onready var move_down_timer: Timer = $Timers/MoveDownTimer
 @onready var enemies: Node2D = $Enemies
 @onready var enemy_destroy_sound: AudioStreamPlayer = $EnemyDestroySound
+@onready var create_bullet_timer: Timer = $Timers/CreateBulletTimer
 
 const ENEMY: PackedScene = preload("res://scenes/enemy/Enemy.tscn")
+
 const ENEMIES_IN_ROW: int = 11
 const TOTAL_ENEMIES: int = ENEMIES_IN_ROW * 5
 const ENEMY_SPAWN_TIME: float = 0.05
@@ -26,6 +28,7 @@ var x_speed: int
 var y_speed: int
 var move_dir: int
 var move_down: bool
+var wave: int
 
 func _ready() -> void:
 	offset_vec = Vector2(48, 50)
@@ -39,7 +42,6 @@ func _physics_process(delta: float) -> void:
 	if all_enemies_spawned and len(enemies.get_children()) == 0:
 		load_var()
 		spawn_timer.start(ENEMY_SPAWN_TIME)
-
 	mark_enemies()
 	move_enemies(delta)
 
@@ -53,7 +55,6 @@ func load_var() -> void:
 	y_speed = 80
 	move_dir = 1
 	move_down = false
-
 
 func move_enemies(delta: float) -> void:
 	if not all_enemies_spawned:
@@ -121,17 +122,39 @@ func spawn_enemy() -> void:
 
 	if total_enemies_spawned == TOTAL_ENEMIES:
 		all_enemies_spawned = true
+		create_bullet_timer.start(3)
+		wave += 1
 		return
 	else:
 		spawn_timer.start(ENEMY_SPAWN_TIME)
 
+func shoot_bullet() -> void:
+	if not all_enemies_spawned:
+		return
+
+	var num: int = randi_range(1, 4 + wave)
+	var list: Array[int] = []
+	var length: int = len(enemies.get_children())
+
+	while list.size() != num:
+		var rand_index: int = randi_range(0, length - 1)
+		list.append(rand_index)
+
+	for i: int in list:
+		var enemy: Enemy = enemies.get_children()[i]
+		SignalBus.emit_create_enemy_bullet(enemy.rigid_body_2d.global_position)
+
+	create_bullet_timer.start(randi_range(2, 4))
 
 func _on_spawn_timer_timeout() -> void:
 	spawn_enemy()
 
 func _on_move_down_timer_timeout() -> void:
-	x_speed += (TOTAL_ENEMIES - len(enemies.get_children())) / 3
+	x_speed += (TOTAL_ENEMIES - len(enemies.get_children())) / 3.
 	move_down = false
 	
 func play_enemy_destroy_sound() -> void:
 	enemy_destroy_sound.play()
+
+func _on_create_bullet_timer_timeout() -> void:
+	shoot_bullet()

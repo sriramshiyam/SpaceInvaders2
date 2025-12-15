@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxir1mllnpj66"]
+
+[ext_resource type="Script" uid="uid://ck0xq02ec35vv" path="res://classes/BrokenParticle.gd" id="1_5o8ra"]
+[ext_resource type="Texture2D" uid="uid://ctf7fkrvwn68i" path="res://assets/sprite/broken_shield/broken1_shield.png" id="1_n4mpf"]
+[ext_resource type="Texture2D" uid="uid://cuaoxcijains7" path="res://assets/sprite/broken_shield/broken2_shield.png" id="2_5o8ra"]
+[ext_resource type="Texture2D" uid="uid://bspid1c3a6kdv" path="res://assets/sprite/broken_shield/broken3_shield.png" id="3_lk6x2"]
+[ext_resource type="Texture2D" uid="uid://bmdt0pavrq65v" path="res://assets/sprite/broken_shield/broken4_shield.png" id="4_1ailq"]
+
+[node name="BrokenShield" type="Node2D"]
+script = ExtResource("1_5o8ra")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(-15, -8)
+collision_layer = 32
+collision_mask = 36
+mass = 0.8
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("1_n4mpf")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+position = Vector2(-2.9083467, -1.408392)
+polygon = PackedVector2Array(1.9083467, -10.591608, 0.9083466, -6.591608, -5.0916533, -6.591608, -5.0916533, -3.591608, -9.091653, -3.591608, -9.091653, 13.408392, 14.908347, 13.408392, 14.908347, -10.591608)
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="."]
+position = Vector2(17, -8)
+collision_layer = 32
+collision_mask = 36
+mass = 0.8
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D2"]
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("2_5o8ra")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D2"]
+position = Vector2(2.174603, -1.5079365)
+polygon = PackedVector2Array(-2.174603, -10.4920635, -2.174603, -6.4920635, 4.8253965, -6.4920635, 4.8253965, -3.4920635, 7.8253965, -3.4920635, 7.8253965, 13.5079365, -12.174603, 13.5079365, -12.174603, -10.4920635)
+
+[node name="RigidBody2D3" type="RigidBody2D" parent="."]
+position = Vector2(-14, 14)
+collision_layer = 32
+collision_mask = 36
+mass = 0.8
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D3"]
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("3_lk6x2")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D3"]
+position = Vector2(-0.1388889, -0.6064815)
+polygon = PackedVector2Array(14.138889, 7.6064816, 14.138889, -6.3935184, -13.861111, -6.3935184, -13.861111, 3.6064816, -9.861111, 3.6064816, -9.861111, 7.6064816)
+
+[node name="RigidBody2D4" type="RigidBody2D" parent="."]
+position = Vector2(17, 14)
+collision_layer = 32
+collision_mask = 36
+mass = 0.8
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D4"]
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("4_1ailq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D4"]
+position = Vector2(0.064412236, -0.5974235)
+polygon = PackedVector2Array(9.935588, -6.4025764, 9.935588, 3.5974236, 6.935588, 3.5974236, 6.935588, 7.5974236, -10.064412, 7.5974236, -10.064412, -6.4025764)

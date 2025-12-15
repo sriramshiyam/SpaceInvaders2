@@ -1,15 +1,10 @@
-extends Area2D
+extends Bullet
 
 class_name PlayerBullet
 
-
-const SPEED: float = 600
-
-func _process(delta: float) -> void:
-	position.y -= SPEED * delta
-	if position.y < -100:
-		queue_free()
-
+func _ready() -> void:
+	SPEED = 600
+	upper_cond = true
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "Enemy":

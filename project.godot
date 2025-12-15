@@ -56,6 +56,8 @@ left={
 2d_physics/layer_3="broken_enemy"
 2d_physics/layer_4="player"
 2d_physics/layer_5="shield"
+2d_physics/layer_6="broken_shield"
+2d_physics/layer_7="enemy_bullet"
 
 [rendering]
 

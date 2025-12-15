@@ -4,6 +4,8 @@ signal create_player_bullet(pos: Vector2)
 signal create_explosion(pos: Vector2)
 signal create_combo(pos: Vector2)
 signal create_broken_enemy(pos: Vector2, type: int)
+signal create_broken_shield(pos: Vector2)
+signal create_enemy_bullet(pos: Vector2)
 signal enemy_destroyed
 
 func emit_create_player_bullet(pos: Vector2) -> void:
@@ -17,6 +19,12 @@ func emit_create_combo(pos: Vector2) -> void:
 
 func emit_create_broken_enemy(pos: Vector2, type: int) -> void:
 	create_broken_enemy.emit(pos, type)
+
+func emit_create_broken_shield(pos: Vector2) -> void:
+	create_broken_shield.emit(pos)
+
+func emit_create_enemy_bullet(pos: Vector2) -> void:
+	create_enemy_bullet.emit(pos)
 
 func emit_enemy_destroyed() -> void:
 	enemy_destroyed.emit()
