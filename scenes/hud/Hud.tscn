@@ -1,0 +1,82 @@
+[gd_scene load_steps=4 format=3 uid="uid://cct4hltjqrjn5"]
+
+[ext_resource type="LabelSettings" uid="uid://boxjyu5wuj4jk" path="res://resources/Hud_Label1.tres" id="1_bn3mh"]
+[ext_resource type="Script" uid="uid://c8u78uw0ndsyy" path="res://scenes/hud/Hud.gd" id="1_x4fhx"]
+[ext_resource type="LabelSettings" uid="uid://yus0rr5x5oeu" path="res://resources/Hud_Label2.tres" id="2_o44a4"]
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x4fhx")
+
+[node name="MC" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 20
+
+[node name="VB" type="VBoxContainer" parent="MC"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MC/VB"]
+layout_mode = 2
+text = "SCORE"
+label_settings = ExtResource("1_bn3mh")
+
+[node name="ScoreLabel" type="Label" parent="MC/VB"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_o44a4")
+
+[node name="Label2" type="Label" parent="MC/VB"]
+layout_mode = 2
+text = "LIVES"
+label_settings = ExtResource("1_bn3mh")
+
+[node name="LivesLabel" type="Label" parent="MC/VB"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "3 ❤️"
+label_settings = ExtResource("2_o44a4")
+
+[node name="Label3" type="Label" parent="MC/VB"]
+layout_mode = 2
+text = "MAX COMBO"
+label_settings = ExtResource("1_bn3mh")
+
+[node name="MaxComboLabel" type="Label" parent="MC/VB"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_o44a4")
+
+[node name="Label4" type="Label" parent="MC/VB"]
+layout_mode = 2
+text = "WAVE"
+label_settings = ExtResource("1_bn3mh")
+
+[node name="WavesLabel" type="Label" parent="MC/VB"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "1"
+label_settings = ExtResource("2_o44a4")
+
+[node name="Label5" type="Label" parent="MC/VB"]
+layout_mode = 2
+text = "KILLS"
+label_settings = ExtResource("1_bn3mh")
+
+[node name="KillsLabel" type="Label" parent="MC/VB"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_o44a4")

@@ -30,7 +30,16 @@ func add_combo(pos: Vector2) -> void:
 		combo.global_position = pos
 		combo.set_combo_number(combo_number)
 		combo.move_label_to_center()
+		
 
 		combo_sound.play()
 
 	combo_timer = 0
+	handle_hud()
+
+
+func handle_hud() -> void:
+	Hud.kills += 1
+	Hud.score += combo_number
+	if Hud.max_combo < combo_number:
+		Hud.max_combo = combo_number

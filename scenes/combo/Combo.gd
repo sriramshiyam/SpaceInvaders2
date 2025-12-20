@@ -19,11 +19,7 @@ func _process(delta: float) -> void:
 	handle_rotate_spring(delta)
 
 func handle_rotate_spring(delta: float) -> void:
-	var x: float = rotation_degrees - rotate_spring.rest_length;
-	rotate_spring.force = -rotate_spring.k * x;
-	rotate_spring.velocity += rotate_spring.force;
-	rotation_degrees += rotate_spring.velocity;
-	rotate_spring.velocity *= rotate_spring.damping;
+	rotation_degrees = Util.calculate_spring(rotation_degrees, rotate_spring)
 	
 	if rotation_degrees > -20.5 and rotation_degrees < -19.5:
 		rest_timer -= delta

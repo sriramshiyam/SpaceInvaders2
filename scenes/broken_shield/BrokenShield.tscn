@@ -8,11 +8,13 @@
 
 [node name="BrokenShield" type="Node2D"]
 script = ExtResource("1_5o8ra")
+min_force = 400.0
+max_force = 500.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(-15, -8)
-collision_layer = 32
-collision_mask = 36
+collision_layer = 4
+collision_mask = 29
 mass = 0.8
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
@@ -25,8 +27,8 @@ polygon = PackedVector2Array(1.9083467, -10.591608, 0.9083466, -6.591608, -5.091
 
 [node name="RigidBody2D2" type="RigidBody2D" parent="."]
 position = Vector2(17, -8)
-collision_layer = 32
-collision_mask = 36
+collision_layer = 4
+collision_mask = 29
 mass = 0.8
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D2"]
@@ -39,8 +41,8 @@ polygon = PackedVector2Array(-2.174603, -10.4920635, -2.174603, -6.4920635, 4.82
 
 [node name="RigidBody2D3" type="RigidBody2D" parent="."]
 position = Vector2(-14, 14)
-collision_layer = 32
-collision_mask = 36
+collision_layer = 4
+collision_mask = 29
 mass = 0.8
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D3"]
@@ -53,8 +55,8 @@ polygon = PackedVector2Array(14.138889, 7.6064816, 14.138889, -6.3935184, -13.86
 
 [node name="RigidBody2D4" type="RigidBody2D" parent="."]
 position = Vector2(17, 14)
-collision_layer = 32
-collision_mask = 36
+collision_layer = 4
+collision_mask = 29
 mass = 0.8
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D4"]

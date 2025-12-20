@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name EnemyHandler
+
 @export var spawn_point: Marker2D
 @export var left_max_pos: Marker2D
 @export var right_max_pos: Marker2D
@@ -9,6 +11,7 @@ extends Node2D
 @onready var enemies: Node2D = $Enemies
 @onready var enemy_destroy_sound: AudioStreamPlayer = $EnemyDestroySound
 @onready var create_bullet_timer: Timer = $Timers/CreateBulletTimer
+@onready var enemy_laser_sound: AudioStreamPlayer = $EnemyLaserSound
 
 const ENEMY: PackedScene = preload("res://scenes/enemy/Enemy.tscn")
 
@@ -17,6 +20,8 @@ const TOTAL_ENEMIES: int = ENEMIES_IN_ROW * 5
 const ENEMY_SPAWN_TIME: float = 0.05
 const MOVE_DOWN_TIME: float = 0.5
 const MAX_ENEMY_TYPE: int = 3
+
+var start_game: bool = false
 
 var offset_vec: Vector2
 var all_enemies_spawned: bool
@@ -29,21 +34,35 @@ var y_speed: int
 var move_dir: int
 var move_down: bool
 var wave: int
+var mystery_ship_created: bool
+var mystery_ship_destroyed: bool
 
 func _ready() -> void:
 	offset_vec = Vector2(48, 50)
 	load_var()
-	spawn_timer.start(ENEMY_SPAWN_TIME)
 
 func _enter_tree() -> void:
 	SignalBus.enemy_destroyed.connect(play_enemy_destroy_sound)
+	SignalBus.mystery_ship_destroyed.connect(on_mystery_ship_destroyed)
 	
 func _physics_process(delta: float) -> void:
-	if all_enemies_spawned and len(enemies.get_children()) == 0:
+	if start_game:
+		start_enemy_spawn()
+		mark_enemies()
+		move_enemies(delta)
+		spawn_mystery_ship()
+
+func start_enemy_spawn() -> void:
+	if all_enemies_spawned and len(enemies.get_children()) == 0\
+		and mystery_ship_destroyed:
 		load_var()
 		spawn_timer.start(ENEMY_SPAWN_TIME)
-	mark_enemies()
-	move_enemies(delta)
+
+func spawn_mystery_ship() -> void:
+	if all_enemies_spawned and len(enemies.get_children()) <= 20\
+		and not mystery_ship_created:
+			SignalBus.emit_spawn_mystery_ship()
+			mystery_ship_created = true
 
 func load_var() -> void:
 	all_enemies_spawned = false
@@ -55,6 +74,9 @@ func load_var() -> void:
 	y_speed = 80
 	move_dir = 1
 	move_down = false
+	mystery_ship_created = false
+	mystery_ship_destroyed = false
+	Hud.waves += 1
 
 func move_enemies(delta: float) -> void:
 	if not all_enemies_spawned:
@@ -70,7 +92,7 @@ func move_enemies(delta: float) -> void:
 			move_down = (enemy.right_most and pos.x > right_max_pos.position.x) or\
 						(enemy.left_most and pos.x < left_max_pos.position.x)
 			if move_down:
-				y_speed += (TOTAL_ENEMIES - len(enemies.get_children())) / 3
+				y_speed += ((TOTAL_ENEMIES - len(enemies.get_children())) / 3) + Hud.waves - 1
 				move_down = true
 				move_dir *= -1
 				move_down_timer.start(MOVE_DOWN_TIME)
@@ -132,9 +154,12 @@ func shoot_bullet() -> void:
 	if not all_enemies_spawned:
 		return
 
+	var length: int = len(enemies.get_children())
+	if length == 0:
+		return
+
 	var num: int = randi_range(1, 4 + wave)
 	var list: Array[int] = []
-	var length: int = len(enemies.get_children())
 
 	while list.size() != num:
 		var rand_index: int = randi_range(0, length - 1)
@@ -143,6 +168,7 @@ func shoot_bullet() -> void:
 	for i: int in list:
 		var enemy: Enemy = enemies.get_children()[i]
 		SignalBus.emit_create_enemy_bullet(enemy.rigid_body_2d.global_position)
+	enemy_laser_sound.play()
 
 	create_bullet_timer.start(randi_range(2, 4))
 
@@ -150,7 +176,7 @@ func _on_spawn_timer_timeout() -> void:
 	spawn_enemy()
 
 func _on_move_down_timer_timeout() -> void:
-	x_speed += (TOTAL_ENEMIES - len(enemies.get_children())) / 3.
+	x_speed += ((TOTAL_ENEMIES - len(enemies.get_children())) / 3) + Hud.waves - 1
 	move_down = false
 	
 func play_enemy_destroy_sound() -> void:
@@ -158,3 +184,6 @@ func play_enemy_destroy_sound() -> void:
 
 func _on_create_bullet_timer_timeout() -> void:
 	shoot_bullet()
+
+func on_mystery_ship_destroyed() -> void:
+	mystery_ship_destroyed = true

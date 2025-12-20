@@ -44,11 +44,7 @@ func handle_movement(delta: float) -> void:
 		position.x -= SPEED * delta
 		
 	position.x = clampf(position.x, left_max_pos.position.x, right_max_pos.position.x)
-	move_and_collide(Vector2())
+	move_and_collide(Vector2.ZERO)
 
 func handle_spring() -> void:
-	var x = global_position.y - jump_spring.rest_length
-	jump_spring.force = -jump_spring.k * x;
-	jump_spring.velocity += jump_spring.force
-	global_position.y += jump_spring.velocity
-	jump_spring.velocity *= jump_spring.damping
+	global_position.y = Util.calculate_spring(global_position.y, jump_spring)

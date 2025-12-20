@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://yus0rr5x5oeu"]
+
+[ext_resource type="FontFile" uid="uid://dt5vpw3gunpjw" path="res://assets/font/Vipnagorgialla_Bd.otf" id="1_2fjqa"]
+
+[resource]
+font = ExtResource("1_2fjqa")
+font_size = 32

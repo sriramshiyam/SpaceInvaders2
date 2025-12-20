@@ -1,9 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://bye0c13r04jke"]
 
-[ext_resource type="Script" uid="uid://div2gmxx1kvkw" path="res://scenes/broken_enemy/BrokenEnemy.gd" id="1_m3v4d"]
+[ext_resource type="Script" uid="uid://ck0xq02ec35vv" path="res://classes/BrokenParticle.gd" id="1_m3v4d"]
 
 [node name="BrokenEnemy" type="Node2D"]
 script = ExtResource("1_m3v4d")
+min_force = 40.0
+max_force = 60.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 collision_layer = 4

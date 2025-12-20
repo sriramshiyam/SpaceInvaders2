@@ -1,10 +1,10 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b5apm2asmwfcs"]
 
-[ext_resource type="FontFile" uid="uid://dt5vpw3gunpjw" path="res://assets/font/Vipnagorgialla_Bd.otf" id="1_bvkb8"]
+[ext_resource type="FontFile" uid="uid://dt5vpw3gunpjw" path="res://assets/font/Vipnagorgialla_Bd.otf" id="1_ukhx7"]
 
 [resource]
 resource_local_to_scene = true
-font = ExtResource("1_bvkb8")
+font = ExtResource("1_ukhx7")
 font_size = 92
 font_color = Color(0, 0, 0, 1)
 outline_size = 100

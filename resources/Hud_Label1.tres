@@ -1,0 +1,6 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://boxjyu5wuj4jk"]
+
+[ext_resource type="FontFile" uid="uid://dt5vpw3gunpjw" path="res://assets/font/Vipnagorgialla_Bd.otf" id="1_jpat2"]
+
+[resource]
+font = ExtResource("1_jpat2")

@@ -1,11 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddnvoiddl3to5"]
+[gd_scene load_steps=4 format=3 uid="uid://ddnvoiddl3to5"]
 
 [ext_resource type="Texture2D" uid="uid://bxisdy8vw43n4" path="res://assets/sprite/mystery_ship.png" id="1_gqar2"]
+[ext_resource type="Script" uid="uid://bsompwq7j6283" path="res://scenes/mystery_ship/MysteryShip.gd" id="1_hth0e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hth0e"]
 size = Vector2(50, 50)
 
 [node name="MysteryShip" type="Area2D"]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("1_hth0e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(3.5, 3.5)

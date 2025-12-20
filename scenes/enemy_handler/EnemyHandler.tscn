@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://mr1auxuvyd41"]
+[gd_scene load_steps=4 format=3 uid="uid://mr1auxuvyd41"]
 
 [ext_resource type="Script" uid="uid://ceny42353d64w" path="res://scenes/enemy_handler/EnemyHandler.gd" id="1_dl6d6"]
 [ext_resource type="AudioStream" uid="uid://cysjrr6f3s1p7" path="res://assets/audio/enemy_destroyed.wav" id="2_mxavo"]
+[ext_resource type="AudioStream" uid="uid://df8hoi080gdwy" path="res://assets/audio/enemy_laser.wav" id="3_n011x"]
 
 [node name="EnemyHandler" type="Node2D"]
 script = ExtResource("1_dl6d6")
@@ -21,6 +22,10 @@ one_shot = true
 
 [node name="EnemyDestroySound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_mxavo")
+volume_db = -15.0
+
+[node name="EnemyLaserSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_n011x")
 volume_db = -15.0
 
 [connection signal="timeout" from="Timers/SpawnTimer" to="." method="_on_spawn_timer_timeout"]

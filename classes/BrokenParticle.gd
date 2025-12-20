@@ -3,8 +3,8 @@ extends Node2D
 class_name BrokenParticle
 
 var impulse_applied: bool = false
-var min_force: float = 400
-var max_force: float = 500
+@export var min_force: float
+@export var max_force: float
 
 func _process(_delta: float) -> void:
 	if len(get_children()) == 0:
