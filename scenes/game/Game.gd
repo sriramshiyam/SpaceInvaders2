@@ -9,7 +9,7 @@ extends Node2D
 @onready var left_max_pos: Marker2D = $Markers/LeftMaxPos
 @onready var right_max_pos: Marker2D = $Markers/RightMaxPos
 @onready var enemy_handler: EnemyHandler = $EnemyHandler
-@onready var shields: Node2D = $Shields
+@onready var shields: Shields = $Shields
 
 const PLAYER_BULLET: PackedScene = preload("res://scenes/player_bullet/PlayerBullet.tscn")
 const EXPLOSION: PackedScene = preload("res://scenes/explosion/Explosion.tscn")
@@ -24,6 +24,7 @@ const BROKEN_MYSTERY_SHIP = preload("res://scenes/broken_mystery_ship/BrokenMyst
 
 func _enter_tree() -> void:
 	SignalBus.start_game.connect(start_game)
+	SignalBus.game_over.connect(game_over)
 	SignalBus.create_player_bullet.connect(create_player_bullet)
 	SignalBus.create_explosion.connect(create_explosion)
 	SignalBus.create_broken_enemy.connect(create_broken_enemy)
@@ -34,9 +35,19 @@ func _enter_tree() -> void:
 
 func start_game() -> void:
 	if not enemy_handler.start_game:
-		enemy_handler.start_game = true
-		enemy_handler.spawn_timer.start(EnemyHandler.ENEMY_SPAWN_TIME)
+		remove_particles()
+		Hud.reset()
+		player.start()
+		enemy_handler.start()
+		shields.create_shields()
 		shields.show()
+
+func game_over() -> void:
+	SignalBus.emit_enemy_destroyed()
+	SignalBus.emit_create_explosion(player.global_position)
+	enemy_handler.start_game = false
+	enemy_handler.game_over = true
+	player.die()
 
 func create_player_bullet(pos: Vector2) -> void:
 	var bullet: PlayerBullet = PLAYER_BULLET.instantiate()
@@ -76,4 +87,9 @@ func create_broken_mystery_ship(pos: Vector2) -> void:
 	var broken_mystery_ship: BrokenParticle = BROKEN_MYSTERY_SHIP.instantiate()
 	broken_mystery_ship.global_position = pos
 	broken_enemies.call_deferred("add_child", broken_mystery_ship)
-	
+
+func remove_particles() -> void:
+	var nodes: Array[Node] = [shields, broken_enemies, broken_shields, enemy_bullets, player_bullets, explosions]
+	for parent_node: Node in nodes:
+		for node: Node in parent_node.get_children():
+			node.queue_free()

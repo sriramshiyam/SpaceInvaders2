@@ -22,6 +22,7 @@ const MOVE_DOWN_TIME: float = 0.5
 const MAX_ENEMY_TYPE: int = 3
 
 var start_game: bool = false
+var game_over: bool = false
 
 var offset_vec: Vector2
 var all_enemies_spawned: bool
@@ -33,7 +34,6 @@ var x_speed: int
 var y_speed: int
 var move_dir: int
 var move_down: bool
-var wave: int
 var mystery_ship_created: bool
 var mystery_ship_destroyed: bool
 
@@ -51,6 +51,8 @@ func _physics_process(delta: float) -> void:
 		mark_enemies()
 		move_enemies(delta)
 		spawn_mystery_ship()
+	elif game_over:
+		victory_dance()
 
 func start_enemy_spawn() -> void:
 	if all_enemies_spawned and len(enemies.get_children()) == 0\
@@ -76,8 +78,7 @@ func load_var() -> void:
 	move_down = false
 	mystery_ship_created = false
 	mystery_ship_destroyed = false
-	Hud.waves += 1
-
+	
 func move_enemies(delta: float) -> void:
 	if not all_enemies_spawned:
 		return
@@ -98,6 +99,10 @@ func move_enemies(delta: float) -> void:
 				move_down_timer.start(MOVE_DOWN_TIME)
 
 		enemy.position = pos
+
+		if enemy.rigid_body_2d.global_position.y > Shields.SHIELD_POS_Y:
+			SignalBus.emit_game_over()
+			return
 
 func mark_enemies() -> void:
 	if len(enemies.get_children()) == 0:
@@ -145,20 +150,20 @@ func spawn_enemy() -> void:
 	if total_enemies_spawned == TOTAL_ENEMIES:
 		all_enemies_spawned = true
 		create_bullet_timer.start(3)
-		wave += 1
+		Hud.waves += 1
 		return
 	else:
 		spawn_timer.start(ENEMY_SPAWN_TIME)
 
 func shoot_bullet() -> void:
-	if not all_enemies_spawned:
+	if not all_enemies_spawned or game_over:
 		return
 
 	var length: int = len(enemies.get_children())
 	if length == 0:
 		return
 
-	var num: int = randi_range(1, 4 + wave)
+	var num: int = randi_range(1, 4 + Hud.waves)
 	var list: Array[int] = []
 
 	while list.size() != num:
@@ -171,6 +176,17 @@ func shoot_bullet() -> void:
 	enemy_laser_sound.play()
 
 	create_bullet_timer.start(randi_range(2, 4))
+
+func start() -> void:
+	for enemy: Enemy in enemies.get_children():
+		enemy.queue_free()
+	start_game = true
+	game_over = false
+	load_var()
+	spawn_timer.start(EnemyHandler.ENEMY_SPAWN_TIME)
+
+func victory_dance() -> void:
+	pass
 
 func _on_spawn_timer_timeout() -> void:
 	spawn_enemy()

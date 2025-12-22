@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dx5g1ga5km0k"]
+[gd_scene load_steps=6 format=3 uid="uid://dx5g1ga5km0k"]
 
 [ext_resource type="Script" uid="uid://b5c1g7tute53t" path="res://scenes/player/Player.gd" id="1_ft8w5"]
 [ext_resource type="Texture2D" uid="uid://odxsi71nochd" path="res://assets/sprite/player.png" id="1_s0eop"]
+[ext_resource type="Shader" uid="uid://claphg6lwwr73" path="res://scenes/player/Player.gdshader" id="2_524rm"]
 [ext_resource type="AudioStream" uid="uid://cu6q5ucyqh7t8" path="res://assets/audio/player_laser.wav" id="3_4kuee"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tpg5x"]
+shader = ExtResource("2_524rm")
+shader_parameter/red_alpha = false
 
 [node name="Player" type="AnimatableBody2D"]
 collision_layer = 8
@@ -10,11 +15,13 @@ collision_mask = 0
 script = ExtResource("1_ft8w5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_tpg5x")
 position = Vector2(0, 1)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("1_s0eop")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2(0, 3.208676)
 polygon = PackedVector2Array(20, 17.791325, 17, -14.208676, 0, -23.208675, -17, -14.208676, -20, 17.791325)
 

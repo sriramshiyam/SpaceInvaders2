@@ -7,6 +7,8 @@ class_name Hud
 @onready var max_combo_label: Label = $MC/VB/MaxComboLabel
 @onready var waves_label: Label = $MC/VB/WavesLabel
 @onready var kills_label: Label = $MC/VB/KillsLabel
+@onready var title: VBoxContainer = $Title
+@onready var game_over: VBoxContainer = $GameOver
 
 static var score: int = 0
 static var lives: String = "❤️❤️❤️"
@@ -21,6 +23,10 @@ static func reset() -> void:
 	waves = 0
 	kills = 0
 
+func _ready() -> void:
+	SignalBus.start_game.connect(game_over.hide)
+	SignalBus.game_over.connect(game_over.show)
+
 func _process(_delta: float) -> void:
 	score_label.text = "%d" % score
 	lives_label.text = lives
@@ -30,4 +36,5 @@ func _process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
+		title.hide()
 		SignalBus.emit_start_game()

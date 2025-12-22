@@ -11,6 +11,9 @@ const SPEED: float = 200
 func _ready() -> void:
 	rotation = -PI / 6
 	rotate_spring = Util.get_spring(0, 0.008, 0)
+	
+func _enter_tree() -> void:
+	SignalBus.start_game.connect(queue_free)
 
 func _physics_process(delta: float) -> void:
 	handle_rotate_spring()

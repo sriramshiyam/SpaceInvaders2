@@ -4,11 +4,14 @@ class_name Player
 
 @export var left_max_pos: Marker2D
 @export var right_max_pos: Marker2D
+@export var start_pos: Marker2D
 
 @onready var bullet_sound: AudioStreamPlayer = $BulletSound
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 var jump_spring: Dictionary
 var shoot_timer: float = 0
+var attacked: bool = false
 
 const SHOOT_SPEED: float = 1000
 const SPEED: float = 400
@@ -16,6 +19,7 @@ const SHOOT_WAIT_TIME: float = 0.2
 
 func _ready() -> void:
 	sync_to_physics = false
+	global_position = start_pos.global_position
 	create_jump_spring()
 
 func create_jump_spring() -> void:
@@ -48,3 +52,19 @@ func handle_movement(delta: float) -> void:
 
 func handle_spring() -> void:
 	global_position.y = Util.calculate_spring(global_position.y, jump_spring)
+
+func die() -> void:
+	hide()
+	process_mode = Node.PROCESS_MODE_DISABLED
+
+func start() -> void:
+	global_position = start_pos.global_position
+	show()
+	process_mode = Node.PROCESS_MODE_INHERIT
+
+func attack_effect() -> void:
+	attacked = true
+	(sprite_2d.material as ShaderMaterial).set_shader_parameter("red_alpha", true)
+	await get_tree().create_timer(3.0).timeout
+	(sprite_2d.material as ShaderMaterial).set_shader_parameter("red_alpha", false)
+	attacked = false

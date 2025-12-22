@@ -30,7 +30,6 @@ func add_combo(pos: Vector2) -> void:
 		combo.global_position = pos
 		combo.set_combo_number(combo_number)
 		combo.move_label_to_center()
-		
 
 		combo_sound.play()
 

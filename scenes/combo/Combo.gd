@@ -10,6 +10,7 @@ var rotate_spring: Dictionary
 var rest_timer: float = 0
 
 func _ready() -> void:
+	rotation_degrees = 10
 	create_rotate_spring()
 
 func create_rotate_spring() -> void:

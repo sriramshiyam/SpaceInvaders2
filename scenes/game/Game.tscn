@@ -26,10 +26,13 @@ position = Vector2(180, 0)
 [node name="RightMaxPos" type="Marker2D" parent="Markers"]
 position = Vector2(972, 0)
 
-[node name="Player" parent="." node_paths=PackedStringArray("left_max_pos", "right_max_pos") instance=ExtResource("1_vrspl")]
+[node name="StartPos" type="Marker2D" parent="Markers"]
 position = Vector2(592, 610)
+
+[node name="Player" parent="." node_paths=PackedStringArray("left_max_pos", "right_max_pos", "start_pos") instance=ExtResource("1_vrspl")]
 left_max_pos = NodePath("../Markers/LeftMaxPos")
 right_max_pos = NodePath("../Markers/RightMaxPos")
+start_pos = NodePath("../Markers/StartPos")
 
 [node name="PlayerBullets" type="Node2D" parent="."]
 

@@ -6,6 +6,9 @@ var impulse_applied: bool = false
 @export var min_force: float
 @export var max_force: float
 
+func _enter_tree() -> void:
+	SignalBus.start_game.connect(queue_free)
+
 func _process(_delta: float) -> void:
 	if len(get_children()) == 0:
 		queue_free()

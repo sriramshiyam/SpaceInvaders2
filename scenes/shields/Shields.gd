@@ -1,5 +1,6 @@
 extends Node2D
 
+class_name Shields
 
 @export var start_point: Marker2D
 @export var end_point: Marker2D
@@ -11,14 +12,11 @@ const SHIELD_POS_Y: float = 540
 
 const SHIELD: PackedScene = preload("res://scenes/shield/Shield.tscn")
 
-func _ready() -> void:
-	calculate_shield_var()
-	create_shields()
-	
 func calculate_shield_var() -> void:
 	x_offset = (end_point.position.x - start_point.position.x) / 7
 
 func create_shields() -> void:
+	calculate_shield_var()
 	x_pos = 0
 	var shield: Shield
 
