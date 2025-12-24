@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://dajkti00tshjx"]
+[gd_scene load_steps=10 format=3 uid="uid://dajkti00tshjx"]
 
 [ext_resource type="Script" uid="uid://ggah3pb6b0jg" path="res://scenes/game/Game.gd" id="1_7qcb4"]
 [ext_resource type="PackedScene" uid="uid://dx5g1ga5km0k" path="res://scenes/player/Player.tscn" id="1_vrspl"]
+[ext_resource type="PackedScene" uid="uid://dorhbwrms30ip" path="res://scenes/stars/Stars.tscn" id="2_gg4pt"]
 [ext_resource type="PackedScene" uid="uid://mr1auxuvyd41" path="res://scenes/enemy_handler/EnemyHandler.tscn" id="2_m44fu"]
 [ext_resource type="PackedScene" uid="uid://cmmfgesinnrvi" path="res://scenes/combos/Combos.tscn" id="4_365ku"]
 [ext_resource type="PackedScene" uid="uid://dtgltfpgaeqjl" path="res://scenes/shields/Shields.tscn" id="5_lyhax"]
 [ext_resource type="PackedScene" uid="uid://cct4hltjqrjn5" path="res://scenes/hud/Hud.tscn" id="6_365ku"]
+[ext_resource type="AudioStream" uid="uid://dlsuju22aueav" path="res://assets/music/game.wav" id="8_qf6a8"]
+[ext_resource type="AudioStream" uid="uid://ccehktyfbwfop" path="res://assets/audio/gameover.mp3" id="9_56wml"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_7qcb4")
@@ -28,6 +31,8 @@ position = Vector2(972, 0)
 
 [node name="StartPos" type="Marker2D" parent="Markers"]
 position = Vector2(592, 610)
+
+[node name="Stars" parent="." instance=ExtResource("2_gg4pt")]
 
 [node name="Player" parent="." node_paths=PackedStringArray("left_max_pos", "right_max_pos", "start_pos") instance=ExtResource("1_vrspl")]
 left_max_pos = NodePath("../Markers/LeftMaxPos")
@@ -59,3 +64,11 @@ end_point = NodePath("../Markers/RightMaxPos")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("6_365ku")]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_qf6a8")
+volume_db = -15.0
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_56wml")
+volume_db = -10.0

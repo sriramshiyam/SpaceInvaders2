@@ -139,7 +139,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Title"]
 layout_mode = 2
-text = "   SPACE 🚀 INVADERS"
+text = "SPACE INVADERS"
 label_settings = ExtResource("4_61npa")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -176,7 +176,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="GameOver"]
 layout_mode = 2
-text = "    EARTH IS DOOMED 🤪"
+text = "EARTH IS DOOMED"
 label_settings = ExtResource("4_61npa")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -187,7 +187,7 @@ layout_mode = 2
 
 [node name="Label2" type="Label" parent="GameOver"]
 layout_mode = 2
-text = "   PRESS <ENTER> TO PLAY AGAIN"
+text = "PRESS <ENTER> TO PLAY AGAIN"
 label_settings = SubResource("LabelSettings_cuxlc")
 horizontal_alignment = 1
 vertical_alignment = 1

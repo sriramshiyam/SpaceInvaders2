@@ -10,6 +10,7 @@ signal enemy_destroyed
 signal spawn_mystery_ship()
 signal mystery_ship_destroyed()
 signal create_broken_mystery_ship(pos: Vector2)
+signal player_moved(right: bool, delta: float)
 
 func emit_create_player_bullet(pos: Vector2) -> void:
 	create_player_bullet.emit(pos)
@@ -41,6 +42,9 @@ func emit_mystery_ship_destroyed() -> void:
 func emit_create_broken_mystery_ship(pos: Vector2) -> void:
 	create_broken_mystery_ship.emit(pos)
 
+func emit_player_moved(right: bool, delta: float) -> void:
+	player_moved.emit(right, delta)
+
 signal start_game()
 signal game_over()
 
@@ -48,4 +52,5 @@ func emit_start_game() -> void:
 	start_game.emit()
 
 func emit_game_over() -> void:
+	await get_tree().create_timer(0.1).timeout
 	game_over.emit()

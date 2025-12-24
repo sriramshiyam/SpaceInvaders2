@@ -46,8 +46,13 @@ func handle_movement(delta: float) -> void:
 		position.x += SPEED * delta
 	elif Input.is_action_pressed("left"):
 		position.x -= SPEED * delta
-		
+
 	position.x = clampf(position.x, left_max_pos.position.x, right_max_pos.position.x)
+	
+	if position.x != left_max_pos.position.x and position.x != right_max_pos.position.x and\
+		(Input.is_action_pressed("right") or Input.is_action_pressed("left")):
+			SignalBus.emit_player_moved(Input.is_action_pressed("right"), delta)
+				
 	move_and_collide(Vector2.ZERO)
 
 func handle_spring() -> void:

@@ -11,14 +11,14 @@ class_name Hud
 @onready var game_over: VBoxContainer = $GameOver
 
 static var score: int = 0
-static var lives: String = "❤️❤️❤️"
+static var lives: int = 3
 static var max_combo: int = 0
 static var waves: int = 0
 static var kills: int = 0
 
 static func reset() -> void:
 	score = 0
-	lives = "❤️❤️❤️"
+	lives = 3
 	max_combo = 0
 	waves = 0
 	kills = 0
@@ -29,7 +29,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	score_label.text = "%d" % score
-	lives_label.text = lives
+	lives_label.text = "%d" % lives
 	max_combo_label.text = "%d" % max_combo
 	waves_label.text = "%d" % waves
 	kills_label.text = "%d" % kills

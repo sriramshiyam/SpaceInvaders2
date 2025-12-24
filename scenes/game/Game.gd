@@ -10,6 +10,8 @@ extends Node2D
 @onready var right_max_pos: Marker2D = $Markers/RightMaxPos
 @onready var enemy_handler: EnemyHandler = $EnemyHandler
 @onready var shields: Shields = $Shields
+@onready var music: AudioStreamPlayer = $Music
+@onready var game_over_sound: AudioStreamPlayer = $GameOverSound
 
 const PLAYER_BULLET: PackedScene = preload("res://scenes/player_bullet/PlayerBullet.tscn")
 const EXPLOSION: PackedScene = preload("res://scenes/explosion/Explosion.tscn")
@@ -20,7 +22,7 @@ const BROKEN_ENEMIES: Array[PackedScene] = [preload("res://scenes/broken_enemy/b
 const BROKEN_SHIELD: PackedScene = preload("res://scenes/broken_shield/BrokenShield.tscn")
 const ENEMY_BULLET: PackedScene = preload("res://scenes/enemy_bullet/EnemyBullet.tscn")
 const MYSTERY_SHIP: PackedScene = preload("res://scenes/mystery_ship/MysteryShip.tscn")
-const BROKEN_MYSTERY_SHIP = preload("res://scenes/broken_mystery_ship/BrokenMysteryShip.tscn")
+const BROKEN_MYSTERY_SHIP: PackedScene = preload("res://scenes/broken_mystery_ship/BrokenMysteryShip.tscn")
 
 func _enter_tree() -> void:
 	SignalBus.start_game.connect(start_game)
@@ -35,6 +37,7 @@ func _enter_tree() -> void:
 
 func start_game() -> void:
 	if not enemy_handler.start_game:
+		music.play()
 		remove_particles()
 		Hud.reset()
 		player.start()
@@ -43,6 +46,8 @@ func start_game() -> void:
 		shields.show()
 
 func game_over() -> void:
+	music.stop()
+	game_over_sound.play()
 	SignalBus.emit_enemy_destroyed()
 	SignalBus.emit_create_explosion(player.global_position)
 	enemy_handler.start_game = false
